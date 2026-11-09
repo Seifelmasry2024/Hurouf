@@ -1,0 +1,365 @@
+/* ============ الألوان (فاتح / داكن) ============ */
+:root {
+  --bg: #f6f4ff;
+  --surface: #ffffff;
+  --text: #1c1a33;
+  --muted: #5d5a7a;
+  --primary: #6c4cff;
+  --on-primary: #ffffff;
+  --secondary: #008f7a;
+  --on-secondary: #ffffff;
+  --coral: #e5484d;
+  --on-coral: #ffffff;
+  --sun: #ffc83d;
+  --shadow: 0 10px 28px rgba(108, 76, 255, 0.12);
+  --radius: 28px;
+}
+
+:root[data-theme="dark"] {
+  --bg: #12111f;
+  --surface: #1b1930;
+  --text: #f2f0ff;
+  --muted: #b3afd6;
+  --primary: #8f78ff;
+  --on-primary: #14102e;
+  --secondary: #2de0c4;
+  --on-secondary: #06352e;
+  --coral: #ff7a7a;
+  --on-coral: #3a0a0a;
+  --shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* ============ أساسيات ============ */
+* { box-sizing: border-box; margin: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: "Cairo", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* خلفية بتدرجات ناعمة */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(40rem 28rem at 90% -5%, color-mix(in srgb, var(--primary) 22%, transparent), transparent 70%),
+    radial-gradient(34rem 24rem at 0% 105%, color-mix(in srgb, var(--secondary) 20%, transparent), transparent 70%);
+}
+
+#app { max-width: 720px; margin: 0 auto; padding: 0 18px 40px; }
+
+button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+
+:focus-visible { outline: 4px solid var(--sun); outline-offset: 3px; border-radius: 12px; }
+
+/* ============ الشريط العلوي ============ */
+.topbar {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 0 8px;
+}
+
+.topbar h1 { text-align: center; font-size: 1.8rem; font-weight: 900; }
+
+.icon-btn {
+  width: 56px; height: 56px;
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  font-size: 1.6rem;
+  display: grid; place-items: center;
+  transition: transform 0.15s;
+}
+.icon-btn:active { transform: scale(0.92); }
+
+.stars-chip {
+  background: color-mix(in srgb, var(--sun) 28%, transparent);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-weight: 800;
+  font-size: 1.25rem;
+  min-width: 56px;
+  text-align: center;
+}
+
+.back-btn {
+  margin: 8px 0;
+  padding: 10px 18px;
+  border-radius: 16px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* ============ البطاقات والأزرار ============ */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.btn {
+  min-height: 64px;
+  padding: 12px 28px;
+  border-radius: 24px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-weight: 800;
+  font-size: 1.4rem;
+  transition: transform 0.15s, filter 0.15s;
+}
+.btn:hover { filter: brightness(1.06); }
+.btn:active { transform: scale(0.97); }
+.btn.success { background: var(--secondary); color: var(--on-secondary); }
+.btn.ghost { background: var(--surface); color: var(--primary); box-shadow: var(--shadow); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn.block { width: 100%; }
+
+/* ============ الشاشة الرئيسية ============ */
+.hello { font-size: 2rem; font-weight: 900; margin: 12px 0 16px; }
+h3 { font-size: 1.4rem; margin: 26px 0 12px; }
+
+.levels { display: grid; gap: 16px; }
+
+.level {
+  display: flex; align-items: center; gap: 16px;
+  width: 100%;
+  text-align: start;
+  transition: transform 0.15s;
+}
+.level:hover { transform: translateY(-3px); }
+.level:active { transform: scale(0.98); }
+.level.locked { opacity: 0.75; }
+
+.lvl-icon {
+  flex: none;
+  width: 76px; height: 76px;
+  border-radius: 24px;
+  display: grid; place-items: center;
+  font-size: 2.5rem;
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
+}
+.level.locked .lvl-icon { background: color-mix(in srgb, var(--muted) 18%, transparent); }
+
+.lvl-text { flex: 1; display: grid; gap: 2px; }
+.lvl-text strong { font-size: 1.3rem; font-weight: 800; }
+.lvl-text small { font-size: 1.05rem; color: var(--muted); }
+.chev { font-size: 2.4rem; color: var(--primary); }
+
+.stars { font-size: 1.5rem; letter-spacing: 2px; }
+.stars .on { color: var(--sun); }
+.stars .off { color: color-mix(in srgb, var(--muted) 45%, transparent); }
+
+.gifts { display: flex; flex-wrap: wrap; gap: 14px; font-size: 3.4rem; line-height: 1.1; }
+.gifts .empty { font-size: 1.1rem; color: var(--muted); }
+
+/* ============ الدرس ============ */
+.lesson-card {
+  display: grid; place-items: center; gap: 4px;
+  text-align: center;
+  padding: 30px 20px;
+  min-height: 360px;
+  cursor: pointer;
+  animation: pop 0.35s ease;
+}
+.lesson-card .emoji { font-size: 5.5rem; line-height: 1.1; }
+.lesson-card .big { font-size: clamp(4rem, 22vw, 7.5rem); font-weight: 900; color: var(--primary); line-height: 1.2; }
+.lesson-card .label { font-size: 1.6rem; font-weight: 700; }
+
+.speak-btn {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 2rem;
+  display: grid; place-items: center;
+  box-shadow: var(--shadow);
+}
+.speak-btn.small { width: 54px; height: 54px; font-size: 1.5rem; flex: none; }
+
+.dots { display: flex; justify-content: center; gap: 8px; margin: 18px 0; }
+.dots span {
+  width: 12px; height: 12px; border-radius: 8px;
+  background: color-mix(in srgb, var(--primary) 28%, transparent);
+  transition: width 0.25s;
+}
+.dots span.on { width: 30px; background: var(--primary); }
+
+.nav { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; }
+
+/* ============ الاختبار ============ */
+.sub { text-align: center; font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+
+.progress {
+  height: 14px; border-radius: 12px; overflow: hidden;
+  background: color-mix(in srgb, var(--secondary) 22%, transparent);
+  margin: 10px 0 20px;
+}
+.progress span { display: block; height: 100%; background: var(--secondary); border-radius: 12px; transition: width 0.4s; }
+
+.prompt { text-align: center; margin-bottom: 18px; }
+.prompt-row { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.prompt h2 { font-size: 1.7rem; font-weight: 800; }
+.prompt .emoji { font-size: 6rem; line-height: 1.2; margin-top: 6px; }
+
+.options { display: grid; gap: 14px; }
+
+.option {
+  min-height: 84px;
+  border-radius: 26px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  font-size: 2.3rem;
+  font-weight: 800;
+  transition: transform 0.15s, background-color 0.2s;
+}
+.option:active { transform: scale(0.97); }
+.option.right { background: var(--secondary); color: var(--on-secondary); }
+.option.wrong { background: var(--coral); color: var(--on-coral); }
+.option:disabled { cursor: default; }
+
+.slots {
+  min-height: 96px;
+  border: 3px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  border-radius: 26px;
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px;
+  padding: 10px;
+  font-size: 3.4rem; font-weight: 800;
+}
+.letters { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin: 20px 0 12px; }
+.letter {
+  width: 84px; height: 84px;
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  font-size: 2.6rem; font-weight: 800;
+}
+.letter:disabled { opacity: 0.25; cursor: default; }
+.build-actions { text-align: center; }
+
+.feedback {
+  text-align: center;
+  font-size: 1.8rem; font-weight: 800;
+  min-height: 3rem;
+  margin-top: 14px;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.feedback.show { opacity: 1; }
+.feedback.good { color: var(--secondary); }
+.feedback.bad { color: var(--coral); }
+
+/* ============ الترحيب والنتيجة والهدية ============ */
+.center-screen {
+  min-height: 80vh;
+  display: grid; place-content: center; justify-items: center;
+  text-align: center; gap: 12px;
+}
+.center-screen .huge { font-size: 8rem; line-height: 1.1; animation: bounce 0.9s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.center-screen h2 { font-size: 2.4rem; font-weight: 900; }
+.center-screen h2.good { color: var(--primary); }
+.center-screen h2.bad { color: var(--coral); }
+.center-screen p { font-size: 1.35rem; color: var(--muted); max-width: 28rem; }
+.center-screen .btn { margin-top: 18px; min-width: 220px; }
+.reward-stars { font-size: 3.4rem; letter-spacing: 4px; }
+.reward-stars .on { color: var(--sun); }
+.reward-stars .off { color: color-mix(in srgb, var(--muted) 45%, transparent); }
+
+/* ===== احتفال: بلالين بتطلع + حلويات وفشار بتنط على الشاشة ===== */
+.fx { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 50; }
+.fx span { position: absolute; line-height: 1; will-change: transform; }
+
+.fx-balloon {
+  bottom: -4rem;
+  opacity: 0;
+  animation: rise var(--dur, 3s) ease-in var(--delay, 0s) forwards;
+}
+
+.fx-treat {
+  bottom: 0;
+  opacity: 0;
+  animation: hop var(--dur, 2.2s) linear var(--delay, 0s) forwards;
+}
+
+@keyframes rise {
+  0%   { transform: translate(0, 0) scale(0.8); opacity: 0; }
+  12%  { opacity: 1; }
+  50%  { transform: translate(var(--sway, 20px), -55vh) scale(1); }
+  100% { transform: translate(calc(var(--sway, 20px) * -1), -125vh) scale(1.05); opacity: 1; }
+}
+
+/* نطّة بتقل تدريجيًا زي كورة بتنط */
+@keyframes hop {
+  0%   { transform: translateY(0) scale(0.4); opacity: 0; animation-timing-function: ease-out; }
+  8%   { opacity: 1; }
+  30%  { transform: translateY(calc(-62vh * var(--h, 1))) rotate(180deg) scale(1); animation-timing-function: ease-in; }
+  50%  { transform: translateY(0) rotate(360deg); animation-timing-function: ease-out; }
+  65%  { transform: translateY(calc(-28vh * var(--h, 1))) rotate(450deg); animation-timing-function: ease-in; }
+  80%  { transform: translateY(0) rotate(540deg); animation-timing-function: ease-out; }
+  88%  { transform: translateY(calc(-10vh * var(--h, 1))) rotate(580deg); animation-timing-function: ease-in; }
+  95%  { transform: translateY(0) rotate(620deg); opacity: 1; }
+  100% { transform: translateY(0) rotate(620deg); opacity: 0; }
+}
+
+/* ===== أقسام وتعليمات ===== */
+.lead { text-align: center; color: var(--muted); font-size: 1.2rem; margin: 4px 0 16px; }
+
+.ghost-word {
+  text-align: center;
+  font-size: 2.6rem; font-weight: 800;
+  letter-spacing: 6px;
+  color: color-mix(in srgb, var(--primary) 45%, transparent);
+  margin-bottom: 10px;
+}
+
+.lesson-card .big.long { font-size: clamp(2.6rem, 11vw, 4.2rem); }
+
+.option.wrong, .slots.bad { animation: shake 0.4s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+/* نافذة اختبار التخطي */
+dialog {
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  padding: 26px;
+  max-width: 90vw; width: 420px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+dialog::backdrop { background: rgba(10, 8, 30, 0.55); }
+dialog h2 { font-size: 1.7rem; margin-bottom: 8px; }
+dialog .row { display: flex; gap: 12px; justify-content: center; margin-top: 22px; }
+dialog .btn { min-height: 56px; font-size: 1.2rem; padding: 8px 22px; }
+
+/* ============ حركات ============ */
+@keyframes pop { from { transform: scale(0.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes bounce { from { transform: scale(0); } to { transform: scale(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .fx { display: none; }
+}
+
+@media (max-width: 420px) {
+  .prompt h2 { font-size: 1.4rem; }
+  .option { font-size: 2rem; }
+  .lvl-icon { width: 64px; height: 64px; font-size: 2.1rem; }
+}

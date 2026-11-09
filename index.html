@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>حروفي</title>
+  <meta name="description" content="موقع لتعليم القراءة والكتابة لذوي الهمم بمستويات واختبارات وهدايا تشجيعية">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- تحديد الوضع (فاتح/داكن) قبل ظهور الصفحة علشان ما يحصلش وميض -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = JSON.parse(localStorage.getItem('hurufi_theme')); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" aria-live="polite"></div>
+  <noscript>الموقع محتاج تفعيل JavaScript علشان يشتغل.</noscript>
+  <script src="app.js"></script>
+</body>
+</html>
